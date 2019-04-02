@@ -86,7 +86,7 @@ heroku logs --tail
     heroku config:set REDIS_PASSWORD=your-redis-password
     ```
 
-4. 重复上述第2和第3步完成余下三个 Scrapyd APP 的部署和配置：`svr-2`，`svr-3` 和 `svr-4`
+4. 重复上述第2步和第3步完成余下三个 Scrapyd APP 的部署和配置：`svr-2`，`svr-3` 和 `svr-4`
 
 
 ## 创建 ScrapydWeb APP

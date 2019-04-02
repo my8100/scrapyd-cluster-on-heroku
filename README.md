@@ -141,8 +141,10 @@ In [4]: r.lpush('mycrawler:start_urls', 'http://books.toscrape.com', 'http://quo
 Out[4]: 2
 
 # wait for a minute
-In [5]: r.lrange('mycrawler_redis:items', 0, 0)
-Out[5]: [b'{"title": "Quotes to Scrape", "url": "http://quotes.toscrape.com/", "hostname": "52adba2b-2e30-4b71-9f3f-8fe471a13413", "crawled": "2019-03-31 15:12:41", "spider": "mycrawler_redis"}']
+In [5]: r.lrange('mycrawler_redis:items', 0, 1)
+Out[5]:
+[b'{"url": "http://quotes.toscrape.com/", "title": "Quotes to Scrape", "hostname": "d6cf94d5-324e-4def-a1ab-e7ee2aaca45a", "crawled": "2019-04-02 03:42:37", "spider": "mycrawler_redis"}',
+ b'{"url": "http://books.toscrape.com/index.html", "title": "All products | Books to Scrape - Sandbox", "hostname": "d6cf94d5-324e-4def-a1ab-e7ee2aaca45a", "crawled": "2019-04-02 03:42:37", "spider": "mycrawler_redis"}']
 ```
 
 ![scrapyd cluster on heroku](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/scrapyd_cluster_on_heroku.gif)
