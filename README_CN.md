@@ -25,6 +25,14 @@
 ![redislabs register](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/redislabs_register.png)
 
 
+## 通过浏览器部署 Heroku APP
+1. 访问 [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) 一键部署 Scrapyd APP。（注意更新页面表单中 Redis 服务器的主机，端口和密码）
+2. 重复第一步完成4个 Scrapyd APP的部署，假设应用名称为 `svr-1`, `svr-2`, `svr-3` and `svr-4`
+3. 访问 [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) 一键部署 ScrapydWeb APP，取名 `myscrapydweb`
+4. 点击 [https://dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) 页面中的 *Reveal Config Vars* 按钮相应添加更多 Scrapyd server，例如 KEY 为 `SCRAPYD_SERVER_2`, VALUE 为 `svr-2.herokuapp.com:80#group2`
+5. 跳转 [部署和运行分布式爬虫](#部署和运行分布式爬虫) 章节继续阅读。
+
+
 ## 安装工具
 1. [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 2. [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
@@ -114,7 +122,7 @@ git push heroku master
     ```
     heroku config:set TZ=Asia/Shanghai
     ```
-    - 添加 Scrapyd server（详见 *scrapydweb_settings_v8.py* in the *scrapydweb* directory）
+    - 添加 Scrapyd server（详见 *scrapydweb* 目录下的 *scrapydweb_settings_v8.py*）
     ```
     heroku config:set SCRAPYD_SERVER_1=svr-1.herokuapp.com:80
     heroku config:set SCRAPYD_SERVER_2=svr-2.herokuapp.com:80#group1
