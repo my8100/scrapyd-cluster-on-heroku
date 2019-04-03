@@ -27,20 +27,24 @@
 
 ## 通过浏览器部署 Heroku APP
 1. 访问 [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) 一键部署 Scrapyd APP。（注意更新页面表单中 Redis 服务器的主机，端口和密码）
-2. 重复第一步完成4个 Scrapyd APP 的部署，假设应用名称为 `svr-1`, `svr-2`, `svr-3` 和 `svr-4`
+2. 重复第1步完成4个 Scrapyd APP 的部署，假设应用名称为 `svr-1`, `svr-2`, `svr-3` 和 `svr-4`
 3. 访问 [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) 一键部署 ScrapydWeb APP，取名 `myscrapydweb`
-4. 点击 [https://dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) 页面中的 **Reveal Config Vars** 按钮相应添加更多 Scrapyd server，例如 KEY 为 `SCRAPYD_SERVER_2`, VALUE 为 `svr-2.herokuapp.com:80#group2`
+4. （可选）点击 [dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) 页面中的 **Reveal Config Vars** 按钮相应添加更多 Scrapyd server，例如 KEY 为 `SCRAPYD_SERVER_2`, VALUE 为 `svr-2.herokuapp.com:80#group2`
 5. 访问 [myscrapydweb.herokuapp.com](https://myscrapydweb.herokuapp.com)
 6. 跳转 [部署和运行分布式爬虫](#部署和运行分布式爬虫) 章节继续阅读。
 
 
-## 安装工具
+## 自定义部署
+<details>
+<summary>View contents</summary>
+
+### 安装工具
 1. [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 2. [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 3. [Python client for Redis](https://pypi.org/project/redis/)：运行 `pip install redis` 命令即可。
 
 
-## 下载配置文件
+### 下载配置文件
 新开一个命令行提示符：
 ```
 git clone https://github.com/my8100/scrapyd-cluster-on-heroku
@@ -48,7 +52,7 @@ cd scrapyd-cluster-on-heroku
 ```
 
 
-## 登录 Heroku
+### 登录 Heroku
 ```
 heroku login
 # outputs:
@@ -59,11 +63,12 @@ heroku login
 ```
 
 
-## 创建 Scrapyd 集群
+### 创建 Scrapyd 集群
 1. 新建 Git 仓库
 ```
 cd scrapyd
 git init
+# explore and update the files if needed
 git status
 git add .
 git commit -a -m "first commit"
@@ -98,12 +103,13 @@ heroku logs --tail
 4. 重复上述第2步和第3步完成余下三个 Scrapyd APP 的部署和配置：`svr-2`，`svr-3` 和 `svr-4`
 
 
-## 创建 ScrapydWeb APP
+### 创建 ScrapydWeb APP
 1. 新建 Git 仓库
 ```
 cd ..
 cd scrapydweb
 git init
+# explore and update the files if needed
 git status
 git add .
 git commit -a -m "first commit"
@@ -134,12 +140,14 @@ git push heroku master
 4. 访问 [myscrapydweb.herokuapp.com](https://myscrapydweb.herokuapp.com)
 ![scrapydweb](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/scrapydweb.png)
 
+</details>
+
 
 ## 部署和运行分布式爬虫
 1. 上传 demo 项目，即 *scrapyd-cluster-on-heroku* 目录下的压缩文档 *scrapy_redis_demo_project.zip*
 2. 将种子请求推入 `mycrawler:start_urls` 触发爬虫并查看结果
 ```
-In [1]: import redis
+In [1]: import redis  # pip install redis
 
 In [2]: r = redis.Redis(host='your-redis-host', port=your-redis-port, password='your-redis-password')
 

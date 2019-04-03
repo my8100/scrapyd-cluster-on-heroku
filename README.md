@@ -29,18 +29,22 @@ Visit [redislabs.com](https://redislabs.com) to create a free account, which pro
 1. Visit [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) to deploy the Scrapyd APP. (Don't forget to update the host, port and password of your Redis server in the form)
 2. Repeat step 1 to deploy up to 4 Scrapyd APPs, assuming theri names are `svr-1`, `svr-2`, `svr-3` and `svr-4`
 3. Visit [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) to deploy the ScrapydWeb APP named `myscrapydweb`
-4. Click the **Reveal Config Vars** button on [https://dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) to add more Scrapyd server accordingly, e.g. `SCRAPYD_SERVER_2` as the KEY and `svr-2.herokuapp.com:80#group2` as the VALUE.
+4. (optional) Click the **Reveal Config Vars** button on [dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) to add more Scrapyd server accordingly, e.g. `SCRAPYD_SERVER_2` as the KEY and `svr-2.herokuapp.com:80#group2` as the VALUE.
 5. Visit [myscrapydweb.herokuapp.com](https://myscrapydweb.herokuapp.com)
 6. Jump to the [Deploy and run distributed spiders](#deploy-and-run-distributed-spiders) section below and move on.
 
 
-## Install tools
+## Custom deployment
+<details>
+<summary>View contents</summary>
+
+### Install tools
 1. [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 2. [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 3. [Python client for Redis](https://pypi.org/project/redis/): Simply run the `pip install redis` command.
 
 
-## Download config files
+### Download config files
 Open a new terminal:
 ```
 git clone https://github.com/my8100/scrapyd-cluster-on-heroku
@@ -48,7 +52,7 @@ cd scrapyd-cluster-on-heroku
 ```
 
 
-## Log in to Heroku
+### Log in to Heroku
 ```
 heroku login
 # outputs:
@@ -59,11 +63,12 @@ heroku login
 ```
 
 
-## Set up Scrapyd cluster
+### Set up Scrapyd cluster
 1. New Git repo
 ```
 cd scrapyd
 git init
+# explore and update the files if needed
 git status
 git add .
 git commit -a -m "first commit"
@@ -98,12 +103,13 @@ heroku logs --tail
 4. Repeat step 2 and step 3 to get the rest Scrapyd APPs ready: `svr-2`, `svr-3` and `svr-4`
 
 
-## Set up ScrapydWeb APP
+### Set up ScrapydWeb APP
 1. New Git repo
 ```
 cd ..
 cd scrapydweb
 git init
+# explore and update the files if needed
 git status
 git add .
 git commit -a -m "first commit"
@@ -134,12 +140,14 @@ git push heroku master
 4. Visit [myscrapydweb.herokuapp.com](https://myscrapydweb.herokuapp.com)
 ![scrapydweb](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/scrapydweb.png)
 
+</details>
+
 
 ## Deploy and run distributed spiders
 1. Simply upload the compressed file *scrapy_redis_demo_project.zip* which resides in the *scrapyd-cluster-on-heroku* directory
 2. Push seed URLs into `mycrawler:start_urls` to fire crawling and check out the scraped items
 ```
-In [1]: import redis
+In [1]: import redis  # pip install redis
 
 In [2]: r = redis.Redis(host='your-redis-host', port=your-redis-port, password='your-redis-password')
 
