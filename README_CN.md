@@ -7,7 +7,7 @@
 [scrapydweb.herokuapp.com](https://scrapydweb.herokuapp.com)
 
 
-## 网路拓扑图
+## 网络拓扑图
 ![network topo](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/network_topology.png)
 
 
@@ -36,7 +36,7 @@
 
 ## 自定义部署
 <details>
-<summary>View contents</summary>
+<summary>查看内容</summary>
 
 ### 安装工具
 1. [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
