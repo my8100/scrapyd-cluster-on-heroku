@@ -27,7 +27,7 @@
 
 ## 通过浏览器部署 Heroku APP
 1. 访问 [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) 一键部署 Scrapyd APP。（注意更新页面表单中 Redis 服务器的主机，端口和密码）
-2. 重复第一步完成4个 Scrapyd APP的部署，假设应用名称为 `svr-1`, `svr-2`, `svr-3` and `svr-4`
+2. 重复第一步完成4个 Scrapyd APP 的部署，假设应用名称为 `svr-1`, `svr-2`, `svr-3` 和 `svr-4`
 3. 访问 [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) 一键部署 ScrapydWeb APP，取名 `myscrapydweb`
 4. 点击 [https://dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) 页面中的 **Reveal Config Vars** 按钮相应添加更多 Scrapyd server，例如 KEY 为 `SCRAPYD_SERVER_2`, VALUE 为 `svr-2.herokuapp.com:80#group2`
 5. 访问 [myscrapydweb.herokuapp.com](https://myscrapydweb.herokuapp.com)
