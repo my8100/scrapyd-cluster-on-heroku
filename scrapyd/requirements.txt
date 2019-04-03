@@ -2,4 +2,4 @@ pip==19.0.3
 scrapy
 scrapyd
 scrapy-redis
-logparser
+logparser==0.8.1

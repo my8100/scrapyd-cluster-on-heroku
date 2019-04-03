@@ -1,2 +1,2 @@
 pip==19.0.3
-scrapydweb
+scrapydweb==1.2.0
