@@ -14,7 +14,7 @@
 ## 注册帐号
 1. Heroku
 
-访问 [heroku.com](https://signup.heroku.com) 注册免费账号（注册页面需要调用 google recaptcha 人机验证，登录页面也需要**科学上网**，访问 APP 运行页面则没有该问题），免费账号最多可以**创建和运行5个 APP**。
+访问 [heroku.com](https://signup.heroku.com) 注册免费账号（注册页面需要调用 google recaptcha 人机验证，登录页面也需要**科学地进行上网**，访问 APP 运行页面则没有该问题），免费账号最多可以**创建和运行5个 APP**。
 
 ![heroku register](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/heroku_register.png)
 
@@ -146,6 +146,7 @@ git push heroku master
 ## 部署和运行分布式爬虫
 1. 上传 demo 项目，即 *scrapyd-cluster-on-heroku* 目录下的压缩文档 *scrapy_redis_demo_project.zip*
 2. 将种子请求推入 `mycrawler:start_urls` 触发爬虫并查看结果
+
 ```
 In [1]: import redis  # pip install redis
 
@@ -173,5 +174,5 @@ Out[5]:
     - 可以爬 Google 等外网
     - 可扩展（借助于 [ScrapydWeb](https://github.com/my8100/scrapydweb)）
  - 缺点
-    - 注册和登录需要科学上网
+    - 注册和登录需要科学地进行上网
     - **Heroku APP 每天至少自动重启一次并且重置所有文件**，因此需要外接数据库保存数据，详见 [devcenter.heroku.com](https://devcenter.heroku.com/articles/dynos#restarting)

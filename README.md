@@ -146,6 +146,7 @@ git push heroku master
 ## Deploy and run distributed spiders
 1. Simply upload the compressed file *scrapy_redis_demo_project.zip* which resides in the *scrapyd-cluster-on-heroku* directory
 2. Push seed URLs into `mycrawler:start_urls` to fire crawling and check out the scraped items
+
 ```
 In [1]: import redis  # pip install redis
 
