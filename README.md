@@ -14,7 +14,7 @@
 ## Create accounts
 1. Heroku
 
-Visit [heroku.com](https://signup.heroku.com) to create a free account, with which you can **create and run up to 5 APPs**.
+Visit [heroku.com](https://signup.heroku.com) to create a free account, with which you can **create and run up to 5 apps**.
 
 ![heroku register](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/heroku_register.png)
 
@@ -25,10 +25,10 @@ Visit [redislabs.com](https://redislabs.com) to create a free account, which pro
 ![redislabs register](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/redislabs_register.png)
 
 
-## Deploy Heroku APPs in the browser
-1. Visit [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) to deploy the Scrapyd APP. (Don't forget to update the host, port and password of your Redis server in the form)
-2. Repeat step 1 to deploy up to 4 Scrapyd APPs, assuming theri names are `svr-1`, `svr-2`, `svr-3` and `svr-4`
-3. Visit [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) to deploy the ScrapydWeb APP named `myscrapydweb`
+## Deploy Heroku apps in the browser
+1. Visit [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) to deploy the Scrapyd app. (Don't forget to update the host, port and password of your Redis server in the form)
+2. Repeat step 1 to deploy up to 4 Scrapyd apps, assuming theri names are `svr-1`, `svr-2`, `svr-3` and `svr-4`
+3. Visit [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) to deploy the ScrapydWeb app named `myscrapydweb`
 4. (optional) Click the **Reveal Config Vars** button on [dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) to add more Scrapyd server accordingly, e.g. `SCRAPYD_SERVER_2` as the KEY and `svr-2.herokuapp.com:80#group2` as the VALUE.
 5. Visit [myscrapydweb.herokuapp.com](https://myscrapydweb.herokuapp.com)
 6. Jump to the [Deploy and run distributed spiders](#deploy-and-run-distributed-spiders) section below and move on.
@@ -75,7 +75,7 @@ git commit -a -m "first commit"
 git status
 ```
 
-2. Deploy Scrapyd APP
+2. Deploy Scrapyd app
 ```
 heroku apps:create svr-1
 heroku git:remote -a svr-1
@@ -100,10 +100,10 @@ heroku logs --tail
     heroku config:set REDIS_PASSWORD=your-redis-password
     ```
 
-4. Repeat step 2 and step 3 to get the rest Scrapyd APPs ready: `svr-2`, `svr-3` and `svr-4`
+4. Repeat step 2 and step 3 to get the rest Scrapyd apps ready: `svr-2`, `svr-3` and `svr-4`
 
 
-### Set up ScrapydWeb APP
+### Set up ScrapydWeb app
 1. New Git repo
 ```
 cd ..
@@ -116,7 +116,7 @@ git commit -a -m "first commit"
 git status
 ```
 
-2. Deploy ScrapydWeb APP
+2. Deploy ScrapydWeb app
 ```
 heroku apps:create myscrapydweb
 heroku git:remote -a myscrapydweb
@@ -173,4 +173,4 @@ Out[5]:
     - Free
     - Scalable (with the help of [ScrapydWeb](https://github.com/my8100/scrapydweb))
  - Cons
-    - **Heroku APPs would be restarted (cycled) at least once per day** and any changes to the local filesystem will be deleted, so you need the external database to persist data. Check out [devcenter.heroku.com](https://devcenter.heroku.com/articles/dynos#restarting) for more info.
+    - **Heroku apps would be restarted (cycled) at least once per day** and any changes to the local filesystem will be deleted, so you need the external database to persist data. Check out [devcenter.heroku.com](https://devcenter.heroku.com/articles/dynos#restarting) for more info.

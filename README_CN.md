@@ -14,7 +14,7 @@
 ## 注册帐号
 1. Heroku
 
-访问 [heroku.com](https://signup.heroku.com) 注册免费账号（注册页面需要调用 google recaptcha 人机验证，登录页面也需要**科学地进行上网**，访问 APP 运行页面则没有该问题），免费账号最多可以**创建和运行5个 APP**。
+访问 [heroku.com](https://signup.heroku.com) 注册免费账号（注册页面需要调用 google recaptcha 人机验证，登录页面也需要**科学地进行上网**，访问 app 运行页面则没有该问题），免费账号最多可以**创建和运行5个 app**。
 
 ![heroku register](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/heroku_register.png)
 
@@ -25,10 +25,10 @@
 ![redislabs register](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/redislabs_register.png)
 
 
-## 通过浏览器部署 Heroku APP
-1. 访问 [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) 一键部署 Scrapyd APP。（注意更新页面表单中 Redis 服务器的主机，端口和密码）
-2. 重复第1步完成4个 Scrapyd APP 的部署，假设应用名称为 `svr-1`, `svr-2`, `svr-3` 和 `svr-4`
-3. 访问 [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) 一键部署 ScrapydWeb APP，取名 `myscrapydweb`
+## 通过浏览器部署 Heroku app
+1. 访问 [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) 一键部署 Scrapyd app。（注意更新页面表单中 Redis 服务器的主机，端口和密码）
+2. 重复第1步完成4个 Scrapyd app 的部署，假设应用名称为 `svr-1`, `svr-2`, `svr-3` 和 `svr-4`
+3. 访问 [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) 一键部署 ScrapydWeb app，取名 `myscrapydweb`
 4. （可选）点击 [dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) 页面中的 **Reveal Config Vars** 按钮相应添加更多 Scrapyd server，例如 KEY 为 `SCRAPYD_SERVER_2`, VALUE 为 `svr-2.herokuapp.com:80#group2`
 5. 访问 [myscrapydweb.herokuapp.com](https://myscrapydweb.herokuapp.com)
 6. 跳转 [部署和运行分布式爬虫](#部署和运行分布式爬虫) 章节继续阅读。
@@ -75,7 +75,7 @@ git commit -a -m "first commit"
 git status
 ```
 
-2. 部署 Scrapyd APP
+2. 部署 Scrapyd app
 ```
 heroku apps:create svr-1
 heroku git:remote -a svr-1
@@ -100,10 +100,10 @@ heroku logs --tail
     heroku config:set REDIS_PASSWORD=your-redis-password
     ```
 
-4. 重复上述第2步和第3步完成余下三个 Scrapyd APP 的部署和配置：`svr-2`，`svr-3` 和 `svr-4`
+4. 重复上述第2步和第3步完成余下三个 Scrapyd app 的部署和配置：`svr-2`，`svr-3` 和 `svr-4`
 
 
-### 创建 ScrapydWeb APP
+### 创建 ScrapydWeb app
 1. 新建 Git 仓库
 ```
 cd ..
@@ -116,7 +116,7 @@ git commit -a -m "first commit"
 git status
 ```
 
-2. 部署 ScrapydWeb APP
+2. 部署 ScrapydWeb app
 ```
 heroku apps:create myscrapydweb
 heroku git:remote -a myscrapydweb
@@ -175,4 +175,4 @@ Out[5]:
     - 可扩展（借助于 [ScrapydWeb](https://github.com/my8100/scrapydweb)）
  - 缺点
     - 注册和登录需要科学地进行上网
-    - **Heroku APP 每天至少自动重启一次并且重置所有文件**，因此需要外接数据库保存数据，详见 [devcenter.heroku.com](https://devcenter.heroku.com/articles/dynos#restarting)
+    - **Heroku app 每天至少自动重启一次并且重置所有文件**，因此需要外接数据库保存数据，详见 [devcenter.heroku.com](https://devcenter.heroku.com/articles/dynos#restarting)
