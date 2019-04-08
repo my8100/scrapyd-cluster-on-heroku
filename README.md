@@ -54,6 +54,7 @@ cd scrapyd-cluster-on-heroku
 
 ### Log in to Heroku
 ```
+# Or run 'heroku login -i' to login with username/password
 heroku login
 # outputs:
 # heroku: Press any key to open up the browser to login or q to exit:
