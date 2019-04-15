@@ -1,5 +1,6 @@
 pip==19.0.3
+Twisted==18.9.0
 scrapy
-scrapyd
+scrapyd==1.2.0
 scrapy-redis
 logparser==0.8.1
