@@ -12,6 +12,9 @@
 
 
 ## Create accounts
+<details>
+<summary>View contents</summary>
+
 1. Heroku
 
 Visit [heroku.com](https://signup.heroku.com) to create a free account, with which you can **create and run up to 5 apps**.
@@ -24,14 +27,21 @@ Visit [redislabs.com](https://redislabs.com) to create a free account, which pro
 
 ![redislabs register](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/redislabs_register.png)
 
+</details>
+
 
 ## Deploy Heroku apps in the browser
+<details>
+<summary>View contents</summary>
+
 1. Visit [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) to deploy the Scrapyd app. (Don't forget to update the host, port and password of your Redis server in the form)
 2. Repeat step 1 to deploy up to 4 Scrapyd apps, assuming theri names are `svr-1`, `svr-2`, `svr-3` and `svr-4`
 3. Visit [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) to deploy the ScrapydWeb app named `myscrapydweb`
 4. (optional) Click the **Reveal Config Vars** button on [dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) to add more Scrapyd server accordingly, e.g. `SCRAPYD_SERVER_2` as the KEY and `svr-2.herokuapp.com:80#group2` as the VALUE.
 5. Visit [myscrapydweb.herokuapp.com](https://myscrapydweb.herokuapp.com)
 6. Jump to the [Deploy and run distributed spiders](#deploy-and-run-distributed-spiders) section below and move on.
+
+</details>
 
 
 ## Custom deployment
@@ -145,6 +155,9 @@ git push heroku master
 
 
 ## Deploy and run distributed spiders
+<details>
+<summary>View contents</summary>
+
 1. Simply upload the compressed file *scrapy_redis_demo_project.zip* which resides in the *scrapyd-cluster-on-heroku* directory
 2. Push seed URLs into `mycrawler:start_urls` to fire crawling and check out the scraped items
 
@@ -166,12 +179,19 @@ Out[5]:
  b'{"url": "http://books.toscrape.com/index.html", "title": "All products | Books to Scrape - Sandbox", "hostname": "d6cf94d5-324e-4def-a1ab-e7ee2aaca45a", "crawled": "2019-04-02 03:42:37", "spider": "mycrawler_redis"}']
 ```
 
+</details>
+
 ![scrapyd cluster on heroku](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/scrapyd_cluster_on_heroku.gif)
 
 
 ## Conclusion
+<details>
+<summary>View contents</summary>
+
  - Pros
     - Free
     - Scalable (with the help of [ScrapydWeb](https://github.com/my8100/scrapydweb))
  - Cons
     - **Heroku apps would be restarted (cycled) at least once per day** and any changes to the local filesystem will be deleted, so you need the external database to persist data. Check out [devcenter.heroku.com](https://devcenter.heroku.com/articles/dynos#restarting) for more info.
+
+</details>

@@ -12,6 +12,9 @@
 
 
 ## 注册帐号
+<details>
+<summary>查看内容</summary>
+
 1. Heroku
 
 访问 [heroku.com](https://signup.heroku.com) 注册免费账号（注册页面需要调用 google recaptcha 人机验证，登录页面也需要**科学地进行上网**，访问 app 运行页面则没有该问题），免费账号最多可以**创建和运行5个 app**。
@@ -24,14 +27,21 @@
 
 ![redislabs register](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/redislabs_register.png)
 
+</details>
+
 
 ## 通过浏览器部署 Heroku app
+<details>
+<summary>查看内容</summary>
+
 1. 访问 [my8100/scrapyd-cluster-on-heroku-scrapyd-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapyd-app) 一键部署 Scrapyd app。（注意更新页面表单中 Redis 服务器的主机，端口和密码）
 2. 重复第1步完成4个 Scrapyd app 的部署，假设应用名称为 `svr-1`, `svr-2`, `svr-3` 和 `svr-4`
 3. 访问 [my8100/scrapyd-cluster-on-heroku-scrapydweb-app](https://github.com/my8100/scrapyd-cluster-on-heroku-scrapydweb-app) 一键部署 ScrapydWeb app，取名 `myscrapydweb`
 4. （可选）点击 [dashboard.heroku.com/apps/myscrapydweb/settings](https://dashboard.heroku.com/apps/myscrapydweb/settings) 页面中的 **Reveal Config Vars** 按钮相应添加更多 Scrapyd server，例如 KEY 为 `SCRAPYD_SERVER_2`, VALUE 为 `svr-2.herokuapp.com:80#group2`
 5. 访问 [myscrapydweb.herokuapp.com](https://myscrapydweb.herokuapp.com)
 6. 跳转 [部署和运行分布式爬虫](#部署和运行分布式爬虫) 章节继续阅读。
+
+</details>
 
 
 ## 自定义部署
@@ -145,6 +155,9 @@ git push heroku master
 
 
 ## 部署和运行分布式爬虫
+<details>
+<summary>查看内容</summary>
+
 1. 上传 demo 项目，即 *scrapyd-cluster-on-heroku* 目录下的压缩文档 *scrapy_redis_demo_project.zip*
 2. 将种子请求推入 `mycrawler:start_urls` 触发爬虫并查看结果
 
@@ -166,10 +179,15 @@ Out[5]:
  b'{"url": "http://books.toscrape.com/index.html", "title": "All products | Books to Scrape - Sandbox", "hostname": "d6cf94d5-324e-4def-a1ab-e7ee2aaca45a", "crawled": "2019-04-02 03:42:37", "spider": "mycrawler_redis"}']
 ```
 
+</details>
+
 ![scrapyd cluster on heroku](https://raw.githubusercontent.com/my8100/files/master/scrapyd-cluster-on-heroku/screenshots/scrapyd_cluster_on_heroku.gif)
 
 
 ## 总结
+<details>
+<summary>查看内容</summary>
+
  - 优点
     - 免费
     - 可以爬 Google 等外网
@@ -177,3 +195,5 @@ Out[5]:
  - 缺点
     - 注册和登录需要科学地进行上网
     - **Heroku app 每天至少自动重启一次并且重置所有文件**，因此需要外接数据库保存数据，详见 [devcenter.heroku.com](https://devcenter.heroku.com/articles/dynos#restarting)
+
+</details>
