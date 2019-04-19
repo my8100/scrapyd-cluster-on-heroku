@@ -28,14 +28,20 @@ import re
 # The default is '0.0.0.0'.
 SCRAPYDWEB_BIND = '0.0.0.0'
 # Accept connections on the specified port, the default is 5000.
-SCRAPYDWEB_PORT = 5000
-SCRAPYDWEB_PORT = int(os.environ.get('PORT', 5000))
+# SCRAPYDWEB_PORT = 5000
+# https://devcenter.heroku.com/articles/runtime-principles#web-servers
+# The port to bind to is assigned by Heroku as the PORT environment variable.
+SCRAPYDWEB_PORT = int(os.environ['PORT'])
 
 # The default is False, set it to True to enable basic auth for web UI.
 ENABLE_AUTH = False
+if os.environ.get('ENABLE_AUTH', 'False') == 'True':
+    ENABLE_AUTH = True
 # In order to enable basic auth, both USERNAME and PASSWORD should be non-empty strings.
 USERNAME = ''
 PASSWORD = ''
+USERNAME = os.environ.get('USERNAME', 'admin')
+PASSWORD = os.environ.get('PASSWORD', 'scrapydweb')
 
 # The default is False, set it to True and add both CERTIFICATE_FILEPATH and PRIVATEKEY_FILEPATH
 # to run ScrapydWeb in HTTPS mode.
@@ -75,16 +81,18 @@ SCRAPY_PROJECTS_DIR = ''
 #   - or if ScrapydWeb fails to parse the string format passed in,
 #   - it's recommended to pass in a tuple of 5 elements.
 #   - e.g. ('', '', '127.0.0.1', '6800', '') or ('username', 'password', 'localhost', '6801', 'group')
-SCRAPYD_SERVERS = [
-    '127.0.0.1:6800',
+# SCRAPYD_SERVERS = [
+    # '127.0.0.1:6800',
     # 'username:password@localhost:6801#group',
-    ('username', 'password', 'localhost', '6801', 'group'),
-]
+    # ('username', 'password', 'localhost', '6801', 'group'),
+# ]
+# Comment the following block if you don't want to set up the SCRAPYD_SERVERS option
+# via environment variables.
 SCRAPYD_SERVERS = []
 for k, v in os.environ.items():
     k = k.strip()
     v = v.strip()
-    if re.match(r'SCRAPYD_SERVER_\d+', k):
+    if re.match(r'SCRAPYD_SERVER_\d+', k) and not re.search(r'^del(ete)?$', v, flags=re.I):
         SCRAPYD_SERVERS.append(v)
 
 # If both ScrapydWeb and one of your Scrapyd servers run on the same machine,
