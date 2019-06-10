@@ -1,5 +1,5 @@
 pip>=19.0.3
-Twisted==18.9.0
+Twisted==19.2.1
 scrapy
 scrapyd
 scrapy-redis
