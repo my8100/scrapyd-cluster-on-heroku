@@ -1,6 +1,6 @@
-pip>=19.1.1
+pip>=19.1
 #Twisted==18.9.0
 scrapy
 scrapyd>=1.2.1
 scrapy-redis
-logparser==0.8.1
+logparser>=0.8.2

@@ -1,28 +1,18 @@
 # coding: utf-8
 """
 How ScrapydWeb works:
-BROWSER_HOST <<<>>> SCRAPYDWEB_BIND:SCRAPYDWEB_PORT <<<>>> your SCRAPYD_SERVERS
+BROWSER <<<>>> SCRAPYDWEB_BIND:SCRAPYDWEB_PORT <<<>>> your SCRAPYD_SERVERS
 
 GitHub: https://github.com/my8100/scrapydweb
+DOCS: https://github.com/my8100/files/blob/master/scrapydweb/README.md
+文档：https://github.com/my8100/files/blob/master/scrapydweb/README_CN.md
 """
 import os
 import re
 
 
-###############################################################################
-###############################################################################
-## QUICK SETUP: Simply search and update the SCRAPYD_SERVERS option, leave the rest as default.
-## Recommended Reading: [How to efficiently manage your distributed web scraping projects]
-## (https://medium.com/@my8100)
-## ------------------------------ Chinese -------------------------------------
-## 快速设置：搜索并更新 SCRAPYD_SERVERS 配置项即可，其余配置项保留默认值。
-## 推荐阅读：[如何简单高效地部署和监控分布式爬虫项目]
-## (https://juejin.im/post/5bebc5fd6fb9a04a053f3a0e)
-###############################################################################
-###############################################################################
-
-
-############################## ScrapydWeb #####################################
+############################## QUICK SETUP start ##############################
+############################## 快速设置 开始 ###################################
 # Setting SCRAPYDWEB_BIND to '0.0.0.0' or IP-OF-THE-CURRENT-HOST would make
 # ScrapydWeb server visible externally; Otherwise, set it to '127.0.0.1'.
 # The default is '0.0.0.0'.
@@ -33,7 +23,7 @@ SCRAPYDWEB_BIND = '0.0.0.0'
 # The port to bind to is assigned by Heroku as the PORT environment variable.
 SCRAPYDWEB_PORT = int(os.environ['PORT'])
 
-# The default is False, set it to True to enable basic auth for web UI.
+# The default is False, set it to True to enable basic auth for the web UI.
 ENABLE_AUTH = False
 if os.environ.get('ENABLE_AUTH', 'False') == 'True':
     ENABLE_AUTH = True
@@ -43,25 +33,7 @@ PASSWORD = ''
 USERNAME = os.environ.get('USERNAME', 'admin')
 PASSWORD = os.environ.get('PASSWORD', 'scrapydweb')
 
-# The default is False, set it to True and add both CERTIFICATE_FILEPATH and PRIVATEKEY_FILEPATH
-# to run ScrapydWeb in HTTPS mode.
-# Note that this feature is not fully tested, please leave your comment here if ScrapydWeb
-# raises any excepion at startup: https://github.com/my8100/scrapydweb/issues/18
-ENABLE_HTTPS = False
-# e.g. '/home/username/cert.pem'
-CERTIFICATE_FILEPATH = ''
-# e.g. '/home/username/cert.key'
-PRIVATEKEY_FILEPATH = ''
 
-
-############################## Scrapy #########################################
-# ScrapydWeb is able to locate projects in the SCRAPY_PROJECTS_DIR,
-# so that you can simply select a project to deploy, instead of packaging it in advance.
-# e.g. 'C:/Users/username/myprojects/' or '/home/username/myprojects/'
-SCRAPY_PROJECTS_DIR = ''
-
-
-############################## Scrapyd ########################################
 # Make sure that [Scrapyd](https://github.com/scrapy/scrapyd) has been installed
 # and started on all of your hosts.
 # Note that for remote access, you have to manually set 'bind_address = 0.0.0.0'
@@ -95,31 +67,59 @@ for k, v in os.environ.items():
     if re.match(r'SCRAPYD_SERVER_\d+', k) and not re.search(r'^del(ete)?$', v, flags=re.I):
         SCRAPYD_SERVERS.append(v)
 
+# It's recommended to update the three options below
+# if both ScrapydWeb and one of your Scrapyd servers run on the same machine.
+# ------------------------------ Chinese --------------------------------------
+# 假如 ScrapydWeb 和某个 Scrapyd 运行于同一台主机，建议更新如下三个设置项。
+
 # If both ScrapydWeb and one of your Scrapyd servers run on the same machine,
 # ScrapydWeb would try to directly read Scrapy logfiles from disk, instead of making a request
 # to the Scrapyd server.
 # e.g. '127.0.0.1:6800' or 'localhost:6801', do not forget the port number.
 LOCAL_SCRAPYD_SERVER = ''
-# Check out this link to find out where the Scrapy logs are stored:
-# https://scrapyd.readthedocs.io/en/stable/config.html#logs-dir
-# e.g. 'C:/Users/username/logs/' or '/home/username/logs/'
-SCRAPYD_LOGS_DIR = ''
 
+# Enter the directory when you run Scrapyd, run the command below
+# to find out where the Scrapy logs are stored:
+# python -c "from os.path import abspath, isdir; from scrapyd.config import Config; path = abspath(Config().get('logs_dir')); print(path); print(isdir(path))"
+# Check out https://scrapyd.readthedocs.io/en/stable/config.html#logs-dir for more info.
+# e.g. 'C:/Users/username/logs' or '/home/username/logs'
+LOCAL_SCRAPYD_LOGS_DIR = ''
+
+# The default is False, set it to True to automatically run LogParser as a subprocess at startup.
+# Note that you can run the LogParser service separately via command 'logparser' as you like.
+# Run 'logparser -h' to find out the config file of LogParser for more advanced settings.
+# Visit https://github.com/my8100/logparser for more info.
+ENABLE_LOGPARSER = False
+############################## QUICK SETUP end ################################
+############################## 快速设置 结束 ###################################
+
+
+############################## ScrapydWeb #####################################
+# The default is False, set it to True and add both CERTIFICATE_FILEPATH and PRIVATEKEY_FILEPATH
+# to run ScrapydWeb in HTTPS mode.
+# Note that this feature is not fully tested, please leave your comment here if ScrapydWeb
+# raises any excepion at startup: https://github.com/my8100/scrapydweb/issues/18
+ENABLE_HTTPS = False
+# e.g. '/home/username/cert.pem'
+CERTIFICATE_FILEPATH = ''
+# e.g. '/home/username/cert.key'
+PRIVATEKEY_FILEPATH = ''
+
+
+############################## Scrapy #########################################
+# ScrapydWeb is able to locate projects in the SCRAPY_PROJECTS_DIR,
+# so that you can simply select a project to deploy, instead of packaging it in advance.
+# e.g. 'C:/Users/username/myprojects' or '/home/username/myprojects'
+SCRAPY_PROJECTS_DIR = ''
+
+
+############################## Scrapyd ########################################
 # ScrapydWeb would try every extension in sequence to locate the Scrapy logfile.
 # The default is ['.log', '.log.gz', '.txt'].
 SCRAPYD_LOG_EXTENSIONS = ['.log', '.log.gz', '.txt']
 
 
 ############################## LogParser ######################################
-# By default ScrapydWeb would automatically run LogParser as a subprocess at startup,
-# so that the stats of crawled_pages and scraped_items can be shown in the Jobs page.
-# The default is True, set it to False to disable this behaviour.
-# Note that you can run the LogParser service separately via command 'logparser' as you like.
-# Run 'logparser -h' to find out the config file of LogParser for more advanced settings.
-# Visit https://github.com/my8100/logparser for more info.
-ENABLE_LOGPARSER = True
-ENABLE_LOGPARSER = False
-
 # Whether to backup the stats json files locally after you visit the Stats page of a job
 # so that it is still accessible even if the original logfile has been deleted.
 # The default is True, set it to False to disable this behaviour.
@@ -135,6 +135,37 @@ BACKUP_STATS_JSON_FILE = True
 # Note that this behaviour would be paused if the scheduler for timer tasks is disabled.
 # Set it to 0 to disable this behaviour.
 JOBS_SNAPSHOT_INTERVAL = 300
+
+
+############################## Run Spider #####################################
+# The default is False, set it to True to automatically
+# expand the 'settings & arguments' section in the Run Spider page.
+SCHEDULE_EXPAND_SETTINGS_ARGUMENTS = False
+
+# The default is 'Mozilla/5.0', set it a non-empty string to customize the default value of `custom`
+# in the drop-down list of `USER_AGENT`.
+SCHEDULE_CUSTOM_USER_AGENT = 'Mozilla/5.0'
+
+# The default is None, set it to any value of ['custom', 'Chrome', 'iPhone', 'iPad', 'Android']
+# to customize the default value of `USER_AGENT`.
+SCHEDULE_USER_AGENT = None
+
+# The default is None, set it to True or False to customize the default value of `ROBOTSTXT_OBEY`.
+SCHEDULE_ROBOTSTXT_OBEY = None
+
+# The default is None, set it to True or False to customize the default value of `COOKIES_ENABLED`.
+SCHEDULE_COOKIES_ENABLED = None
+
+# The default is None, set it to a non-negative integer to customize the default value of `CONCURRENT_REQUESTS`.
+SCHEDULE_CONCURRENT_REQUESTS = None
+
+# The default is None, set it to a non-negative number to customize the default value of `DOWNLOAD_DELAY`.
+SCHEDULE_DOWNLOAD_DELAY = None
+
+# The default is "-d setting=CLOSESPIDER_TIMEOUT=60\r\n-d setting=CLOSESPIDER_PAGECOUNT=10\r\n-d arg1=val1",
+# set it to '' or any non-empty string to customize the default value of `additional`.
+# Use '\r\n' as the line separator.
+SCHEDULE_ADDITIONAL = "-d setting=CLOSESPIDER_TIMEOUT=60\r\n-d setting=CLOSESPIDER_PAGECOUNT=10\r\n-d arg1=val1"
 
 
 ############################## Page Display ###################################
@@ -156,7 +187,7 @@ JOBS_RELOAD_INTERVAL = 300
 # The load status of the current Scrapyd server is checked every N seconds,
 # which is displayed in the top right corner of the page.
 # The default is 10, set it to 0 to disable auto-refreshing.
-DAEMONSTATUS_REFRESH_INTERVAL = 60
+DAEMONSTATUS_REFRESH_INTERVAL = 10
 
 
 ############################## Email Notice ###################################
@@ -297,3 +328,20 @@ DEBUG = False
 VERBOSE = False
 if os.environ.get('VERBOSE', 'False') == 'True':
     VERBOSE = True
+
+# The default is '', which means saving all program data in the Python directory.
+# e.g. 'C:/Users/username/scrapydweb_data' or '/home/username/scrapydweb_data'
+DATA_PATH = ''
+
+# The default is '', which means saving data of Jobs and Timer Tasks in DATA_PATH using SQLite.
+# The data could be also saved in MySQL or PostgreSQL backend in order to improve concurrency.
+# To use MySQL backend, run command: pip install --upgrade pymysql
+# To use PostgreSQL backend, run command: pip install --upgrade psycopg2
+# e.g.
+# 'mysql://username:password@127.0.0.1:3306'
+# 'postgres://username:password@127.0.0.1:5432'
+# 'sqlite:///C:/Users/username'
+# 'sqlite:////home/username'
+DATABASE_URL = ''
+DATABASE_URL = os.environ.get('DATABASE_URL', '')
+DATABASE_URL = DATABASE_URL if DATABASE_URL != 'unset' else ''
