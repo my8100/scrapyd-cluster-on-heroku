@@ -140,7 +140,7 @@ git push heroku master
     ```
     heroku config:set TZ=US/Eastern
     ```
-    - Scrapyd servers (see *scrapydweb_settings_v9.py* in the *scrapydweb* directory)
+    - Scrapyd servers (see *scrapydweb_settings_vN.py* in the *scrapydweb* directory)
     ```
     heroku config:set SCRAPYD_SERVER_1=svr-1.herokuapp.com:80
     heroku config:set SCRAPYD_SERVER_2=svr-2.herokuapp.com:80#group1

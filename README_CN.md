@@ -140,7 +140,7 @@ git push heroku master
     ```
     heroku config:set TZ=Asia/Shanghai
     ```
-    - 添加 Scrapyd server（详见 *scrapydweb* 目录下的 *scrapydweb_settings_v9.py*）
+    - 添加 Scrapyd server（详见 *scrapydweb* 目录下的 *scrapydweb_settings_vN.py*）
     ```
     heroku config:set SCRAPYD_SERVER_1=svr-1.herokuapp.com:80
     heroku config:set SCRAPYD_SERVER_2=svr-2.herokuapp.com:80#group1

@@ -1,5 +1,10 @@
 Release History
 ===============
+0.3.0 (2019-08-16)
+------------------
+- Create scrapydweb_settings_v10.py for scrapydweb v1.4.0
+
+
 0.2.0 (2019-08-04)
 ------------------
 - Create scrapydweb_settings_v9.py for scrapydweb v1.3.0
