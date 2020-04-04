@@ -5,6 +5,7 @@ __pycache__/
 
 instance/
 
+.DS_Store
 .pytest_cache/
 .coverage
 htmlcov/
